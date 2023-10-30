@@ -15,8 +15,8 @@ model Todo {
   id        String   @id @default(uuid())  // ID otomatis
   title     String
   completed Boolean @default(false)
-  createdAt Int // Tanggal pembuatan tugas
-  updateAt Int
+  createdAt DateTime @default(now()) // Tanggal pembuatan tugas
+  updateAt DateTime @updatedAt
   listId    String?  // ID daftar tugas yang terkait
   list      TodoList? @relation(fields: [listId], references: [id])
 }
@@ -26,6 +26,6 @@ model TodoList {
   id       String  @id @default(cuid())  // ID otomatis
   name     String
   todos    Todo[]  // Relasi dengan tugas, satu daftar dapat memiliki banyak tugas
-  createdAt Int // Tanggal pembuatan daftar tugas
-  updateAt Int
+  createdAt  DateTime @default(now())// Tanggal pembuatan daftar tugas
+  updateAt DateTime @updatedAt
 }
