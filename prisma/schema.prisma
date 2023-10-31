@@ -12,20 +12,23 @@ datasource db {
 
 // Definisikan model untuk tugas (todo)
 model Todo {
-  id        String   @id @default(uuid())  // ID otomatis
-  title     String
-  completed Boolean @default(false)
-  createdAt DateTime @default(now()) // Tanggal pembuatan tugas
-  updateAt DateTime @updatedAt
-  listId    String?  // ID daftar tugas yang terkait
-  list      TodoList? @relation(fields: [listId], references: [id])
+  id          String    @id @default(cuid()) // ID otomatis
+  title       String
+  description String?
+  dueDate     DateTime?
+  completed   Boolean   @default(false)
+  createdAt   DateTime  @default(now()) // Tanggal pembuatan tugas
+  updatedAt   DateTime  @updatedAt
+  TodoListId    TodoList? @relation(fields: [todoListId], references: [id])
+  todoListId String?
 }
 
 // Definisikan model untuk daftar tugas (todo list)
 model TodoList {
-  id       String  @id @default(cuid())  // ID otomatis
-  name     String
-  todos    Todo[]  // Relasi dengan tugas, satu daftar dapat memiliki banyak tugas
-  createdAt  DateTime @default(now())// Tanggal pembuatan daftar tugas
-  updateAt DateTime @updatedAt
+  id          String   @id @default(uuid()) // ID otomatis
+  name        String
+  description String?
+  todos       Todo[] // Relasi dengan tugas, satu daftar dapat memiliki banyak tugas
+  createdAt   DateTime @default(now()) // Tanggal pembuatan daftar tugas
+  updatedAt   DateTime @updatedAt
 }
