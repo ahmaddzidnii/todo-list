@@ -1,6 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Dalam project ini saya telah belajar banyak tentang CRUD menggunakan bahasa pemrograman node js. jika kalian ingin menclone repo ini jangan lupa ikuti langkah langkah dibawah ini.
 
 ## Getting Started
+
+After Clone
+
+```bash
+npm install
+# or
+yarn add
+# or
+pnpm install
+# or
+bun install
+```
 
 First, run the development server:
 

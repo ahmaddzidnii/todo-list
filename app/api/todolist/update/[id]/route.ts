@@ -32,13 +32,13 @@ export const PUT = async (req: Request, { params }: { params: { slug: string; id
   };
 
   try {
-    const updateTodoList = await prisma.todoList.update({
+    await prisma.todoList.update({
       where: {
         id,
       },
       data,
     });
-    return res.json({message:"Todolist berhasil di update!"});
+    return res.json({ message: "Todolist berhasil di update!" });
   } catch (error) {
     console.log(error);
 
@@ -48,5 +48,7 @@ export const PUT = async (req: Request, { params }: { params: { slug: string; id
       },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 };

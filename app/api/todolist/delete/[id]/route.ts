@@ -30,5 +30,7 @@ export const DELETE = async (req: Request, { params }: { params: { slug: string;
       },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 };
