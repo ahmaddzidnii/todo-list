@@ -1,8 +1,7 @@
 import prisma from "@/lib/db/prismaClient";
 import { Prisma } from "@prisma/client";
-import { NextResponse as res } from "next/server";
-
-export const PUT = async (req: Request, { params }: { params: { slug: string; id: string } }) => {
+import { NextRequest, NextResponse as res } from "next/server";
+export const putTodoListHandler = async (req: Request, { params }: { params: { slug: string; id: string } }) => {
   // Mengecek isi header request body
   const contentLength = req.headers.get("content-length");
   if (contentLength === "0") {
