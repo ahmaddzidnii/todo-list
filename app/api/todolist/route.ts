@@ -18,14 +18,22 @@ export const GET = async (req: NextRequest) => {
           },
         },
       });
+
       if (todoListbyDate.length == 0) {
         return res.json({ message: `Todolist tidak ditemukan untuk katakunci ${query}` }, { status: 404 });
       }
       return res.json({ todoListbyDate });
     }
 
-    const todoListNoFilter = await prisma.todoList.findMany();
-    return res.json({ todoList: todoListNoFilter });
+    const todoList = await prisma.todoList.findMany({
+      where: {
+        name: {
+          contains: query?.toLowerCase(),
+          mode: "insensitive",
+        },
+      },
+    });
+    return res.json({ todoList: todoList });
   } catch (error) {
     console.log(error);
     return res.json({ message: "Internal server error!" }, { status: 500 });
@@ -33,3 +41,8 @@ export const GET = async (req: NextRequest) => {
     await prisma.$disconnect();
   }
 };
+
+// export async function POST (req:Request) {
+// return res.json({message:"Todolist berhasil di tambahkan!"}, {status:201});
+
+// }
