@@ -1,7 +1,7 @@
-import { deleteTodoHandler } from "@/controller/todos/delete";
-import { getTodoHandler } from "@/controller/todos/get";
-import { postTodoHandler } from "@/controller/todos/post";
-import { putTodoHandler } from "@/controller/todos/put";
+import { deleteTodoHandler } from "@/app/controller/todos/delete";
+import { getTodoHandler } from "@/app/controller/todos/get";
+import { postTodoHandler } from "@/app/controller/todos/post";
+import { putTodoHandler } from "@/app/controller/todos/put";
 
 export const GET = getTodoHandler;
 export const POST = postTodoHandler;
