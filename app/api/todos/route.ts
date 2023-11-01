@@ -1,12 +1,9 @@
+import { deleteTodoHandler } from "@/controller/todos/delete";
 import { getTodoHandler } from "@/controller/todos/get";
 import { postTodoHandler } from "@/controller/todos/post";
-import { NextResponse as res } from "next/server";
+import { putTodoHandler } from "@/controller/todos/put";
 
 export const GET = getTodoHandler;
 export const POST = postTodoHandler;
-export const PUT = async (req: Request) => {
-  return res.json({ message: "PUT" });
-};
-export const DELETE = async (req: Request) => {
-  return res.json({ message: "DELETE" });
-};
+export const PUT = putTodoHandler;
+export const DELETE = deleteTodoHandler;
