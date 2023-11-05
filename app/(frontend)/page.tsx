@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
 import moment from "moment";
+import { CreateTodoList } from "@/app/(frontend)/create-todo-list";
+import Link from "next/link";
 
 const getTodoList = async () => {
   const response = await axios.get("http://localhost:3000/api/todolist");
@@ -23,16 +25,16 @@ export default async function Home() {
 
   return (
     <div className="p-5">
-      <Button variant="default">Tambah TodoList</Button>
+      <CreateTodoList />
 
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">CreatedAt</TableHead>
+            <TableHead className="w-[150px]">CreatedAt</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Descriptions</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -46,6 +48,9 @@ export default async function Home() {
                 <TableCell>{todo.name}</TableCell>
                 <TableCell>{todo.description}</TableCell>
                 <TableCell className="flex justify-end gap-x-3">
+                  <Button variant="default" size="sm" asChild>
+                    <Link href={`/todos/${todo.id}`}>Pilih</Link>
+                  </Button>
                   <Button variant="secondary" size="sm">
                     Edit
                   </Button>
