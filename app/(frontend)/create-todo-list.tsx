@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,8 @@ import { useToast } from "@/components/ui/use-toast";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
+import { AiOutlinePlus } from "react-icons/ai";
 
 export const CreateTodoList = () => {
   const [data, setData] = useState({
@@ -48,7 +50,10 @@ export const CreateTodoList = () => {
     <>
       <Dialog open={hiddenModal} onOpenChange={setHiddenModal}>
         <DialogTrigger asChild>
-          <Button variant="default">Tambah TodoList</Button>
+          <Button variant="default">
+            <AiOutlinePlus className=" text-lg mr-2" />
+            New
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

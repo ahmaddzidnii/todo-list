@@ -3,7 +3,10 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import axios from "axios";
 import moment from "moment";
 import { CreateTodoList } from "@/app/(frontend)/create-todo-list";
+import { DeleteTodoList } from "@/app/(frontend)/delete-todo-list";
 import Link from "next/link";
+
+import { FiEdit } from "react-icons/fi";
 
 const getTodoList = async () => {
   const response = await axios.get("http://localhost:3000/api/todolist");
@@ -34,7 +37,7 @@ export default async function Home() {
             <TableHead className="w-[150px]">CreatedAt</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Descriptions</TableHead>
-            <TableHead className="text-center">Actions</TableHead>
+            <TableHead className="text-end">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -52,11 +55,9 @@ export default async function Home() {
                     <Link href={`/todos/${todo.id}`}>Pilih</Link>
                   </Button>
                   <Button variant="secondary" size="sm">
-                    Edit
+                    <FiEdit className="text-lg" />
                   </Button>
-                  <Button variant="destructive" size="sm">
-                    Delete
-                  </Button>
+                  <DeleteTodoList idTodoList={todo.id} />
                 </TableCell>
               </TableRow>
             );
