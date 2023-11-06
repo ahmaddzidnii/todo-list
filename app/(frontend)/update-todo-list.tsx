@@ -8,11 +8,11 @@ import { Label } from "@/components/ui/label";
 
 import { useState } from "react";
 
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { FiEdit } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { axiosInstance } from "@/lib/axiosInstance";
 type Props = {
   name: string;
   description: string;
@@ -31,7 +31,7 @@ export const UpdateTodoList: React.FC<Props> = ({ name, description, idTodoList 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/todolist/${idTodoList}`, data);
+      await axiosInstance.put(`/todolist/${idTodoList}`, data);
       setHiddenModal(false);
       toast.success("Todolist updated successfully");
       router.refresh();

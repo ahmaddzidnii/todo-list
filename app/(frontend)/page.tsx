@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import axios from "axios";
 import moment from "moment";
 import { CreateTodoList } from "@/app/(frontend)/create-todo-list";
 import { DeleteTodoList } from "@/app/(frontend)/delete-todo-list";
@@ -8,11 +7,16 @@ import Link from "next/link";
 
 import { UpdateTodoList } from "./update-todo-list";
 import { OptionsFilter } from "./opsi-filter";
+import { axiosInstance } from "@/lib/axiosInstance";
 
 const getTodoList = async () => {
-  const response = await axios.get("http://localhost:3000/api/todolist");
-  const todoList = response.data.todoList;
-  return todoList;
+  try {
+    const response = await axiosInstance.get("/todolist?orderBy=desc");
+    const todoList = response.data.todoList;
+    return todoList;
+  } catch (error) {
+    return [];
+  }
 };
 
 type todoList = {
@@ -35,20 +39,20 @@ export default async function Home() {
       </div>
 
       <Table>
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+        <TableCaption>A list of your todolist.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[150px]">CreatedAt</TableHead>
+            <TableHead className="w-[180px]">CreatedAt</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Descriptions</TableHead>
             <TableHead className="text-end">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {todoList.map((todo) => {
+          {todoList?.map((todo) => {
             const databaseTime = new Date(todo.createdAt);
 
-            const date = moment(databaseTime).format("ll");
+            const date = moment(databaseTime).format("lll");
             return (
               <TableRow key={todo.id}>
                 <TableCell className="font-medium">{date}</TableCell>

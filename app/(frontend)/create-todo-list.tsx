@@ -8,11 +8,11 @@ import { Label } from "@/components/ui/label";
 
 import { useState } from "react";
 
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { AiOutlinePlus } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { axiosInstance } from "@/lib/axiosInstance";
 
 export const CreateTodoList = () => {
   const [data, setData] = useState({
@@ -27,7 +27,7 @@ export const CreateTodoList = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/todolist", data);
+      await axiosInstance.post("todolist", data);
       setHiddenModal(false);
       router.refresh();
       toast.success("Todolist created successfully");
@@ -39,7 +39,7 @@ export const CreateTodoList = () => {
     <>
       <Dialog open={hiddenModal} onOpenChange={setHiddenModal}>
         <DialogTrigger asChild>
-          <Button variant="default">
+          <Button variant="default" size="sm">
             <AiOutlinePlus className=" text-lg mr-2" />
             New
           </Button>

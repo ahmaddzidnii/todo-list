@@ -21,7 +21,7 @@ export const getTodoListHandler = async (req: NextRequest) => {
       if (todoListbyDate.length == 0) {
         return res.json({ message: `Todolist tidak ditemukan untuk katakunci ${query}` }, { status: 404 });
       }
-      return res.json({ todoListbyDate });
+      return res.json({ todoList: todoListbyDate });
     }
 
     const todoList = await prisma.todoList.findMany({
