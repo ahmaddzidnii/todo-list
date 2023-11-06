@@ -6,7 +6,7 @@ import { CreateTodoList } from "@/app/(frontend)/create-todo-list";
 import { DeleteTodoList } from "@/app/(frontend)/delete-todo-list";
 import Link from "next/link";
 
-import { FiEdit } from "react-icons/fi";
+import { UpdateTodoList } from "./update-todo-list";
 
 const getTodoList = async () => {
   const response = await axios.get("http://localhost:3000/api/todolist");
@@ -54,9 +54,8 @@ export default async function Home() {
                   <Button variant="default" size="sm" asChild>
                     <Link href={`/todos/${todo.id}`}>Pilih</Link>
                   </Button>
-                  <Button variant="secondary" size="sm">
-                    <FiEdit className="text-lg" />
-                  </Button>
+                  <UpdateTodoList name={todo.name} description={todo.description} idTodoList={todo.id} />
+
                   <DeleteTodoList idTodoList={todo.id} />
                 </TableCell>
               </TableRow>
