@@ -9,8 +9,7 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
-
-import { useToast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";
 
 type Props = {
   idTodoList: string;
@@ -18,19 +17,16 @@ type Props = {
 export const DeleteTodoList: React.FC<Props> = ({ idTodoList }) => {
   const [hiddenModal, setHiddenModal] = useState(false);
   const router = useRouter();
-  const { toast }: any = useToast();
 
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:3000/api/todolist/${idTodoList}`);
       setHiddenModal(false);
       router.refresh();
-      toast({
-        title: "Berhasil",
-        description: "Todolist Berhasil Dihapus",
-      });
+      toast.success("Todolist deleted successfully");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to delete todolist");
     }
   };
 

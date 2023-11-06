@@ -7,6 +7,7 @@ import { DeleteTodoList } from "@/app/(frontend)/delete-todo-list";
 import Link from "next/link";
 
 import { UpdateTodoList } from "./update-todo-list";
+import { OptionsFilter } from "./opsi-filter";
 
 const getTodoList = async () => {
   const response = await axios.get("http://localhost:3000/api/todolist");
@@ -28,7 +29,10 @@ export default async function Home() {
 
   return (
     <div className="p-5">
-      <CreateTodoList />
+      <div className="flex justify-between items-center py-5">
+        <CreateTodoList />
+        <OptionsFilter />
+      </div>
 
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}

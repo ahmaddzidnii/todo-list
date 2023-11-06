@@ -4,7 +4,7 @@ import "@/app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Todo List",
@@ -15,10 +15,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <div className="z-[999999]">
-          <Toaster />
+        <div className="z-[999999999]">
+          <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         </div>
+        {children}
       </body>
     </html>
   );

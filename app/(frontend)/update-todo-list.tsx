@@ -8,12 +8,11 @@ import { Label } from "@/components/ui/label";
 
 import { useState } from "react";
 
-import { useToast } from "@/components/ui/use-toast";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { FiEdit } from "react-icons/fi";
+import toast from "react-hot-toast";
 type Props = {
   name: string;
   description: string;
@@ -28,26 +27,17 @@ export const UpdateTodoList: React.FC<Props> = ({ name, description, idTodoList 
   const [hiddenModal, setHiddenModal] = useState(false);
 
   const router = useRouter();
-  const { toast }: any = useToast();
-
-  const showToast = () => {
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-    });
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3000/api/todolist/${idTodoList}`, data);
-
       setHiddenModal(false);
+      toast.success("Todolist updated successfully");
       router.refresh();
     } catch (error) {
-      showToast();
       console.log(error);
+      toast.error("Failed to update todolist");
     }
   };
   return (

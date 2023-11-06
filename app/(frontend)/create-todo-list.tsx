@@ -8,12 +8,11 @@ import { Label } from "@/components/ui/label";
 
 import { useState } from "react";
 
-import { useToast } from "@/components/ui/use-toast";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { AiOutlinePlus } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 export const CreateTodoList = () => {
   const [data, setData] = useState({
@@ -24,26 +23,16 @@ export const CreateTodoList = () => {
   const [hiddenModal, setHiddenModal] = useState(false);
 
   const router = useRouter();
-  const { toast }: any = useToast();
-
-  const showToast = () => {
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-    });
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/api/todolist", data);
-
       setHiddenModal(false);
       router.refresh();
+      toast.success("Todolist created successfully");
     } catch (error) {
-      showToast();
-      console.log(error);
+      toast.error("Terjadi Kesalahan saat menambahkan todolist");
     }
   };
   return (
