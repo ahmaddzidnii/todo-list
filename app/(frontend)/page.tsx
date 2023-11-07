@@ -27,9 +27,10 @@ type todoList = {
   updatedAt: string;
 };
 
-export default async function Home() {
+export default async function Home(searchParams: { [key: string]: string | string[] | undefined }) {
   const todoList: todoList[] = await getTodoList();
   moment.locale("id");
+  console.log(searchParams);
 
   return (
     <div className="p-5">
