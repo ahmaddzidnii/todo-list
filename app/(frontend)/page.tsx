@@ -7,17 +7,7 @@ import Link from "next/link";
 
 import { UpdateTodoList } from "./update-todo-list";
 import { OptionsFilter } from "./opsi-filter";
-import { axiosInstance } from "@/lib/axiosInstance";
-
-const getTodoList = async () => {
-  try {
-    const response = await axiosInstance.get("/todolist?orderBy=desc");
-    const todoList = response.data.todoList;
-    return todoList;
-  } catch (error) {
-    return [];
-  }
-};
+import { getTodoList } from "@/services/todolist";
 
 type todoList = {
   id: string;
